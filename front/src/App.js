@@ -15,6 +15,7 @@ import About from './components/About';
 import Sidebar from './components/Sidebar';
 import SignIn from './components/Signin';
 import SignUp from './components/Signup';
+import SendRequest from './components/SendRequest';
 
 
 const App = () => {
@@ -111,11 +112,11 @@ const App = () => {
                   exact
                   render={
                     () => <SignIn
-                setParentIsProcessing={(arg) => setParentIsProcessing(arg)}
-                setParentLoggedIn={(arg) => setParentLoggedIn(arg)}
-                setParentUser={(arg) => setParentUser(arg)}
-                setParentType={(arg) => setParentType(arg)}
-                setParentAgent={(arg) => setParentAgent(arg)}
+                      setParentIsProcessing={(arg) => setParentIsProcessing(arg)}
+                      setParentLoggedIn={(arg) => setParentLoggedIn(arg)}
+                      setParentUser={(arg) => setParentUser(arg)}
+                      setParentType={(arg) => setParentType(arg)}
+                      setParentAgent={(arg) => setParentAgent(arg)}
                     />
                   }
                 ></Route>
@@ -124,14 +125,22 @@ const App = () => {
                   exact
                   render={
                     () => <SignUp
-                setParentIsProcessing={(arg) => setParentIsProcessing(arg)}
-                setParentLoggedIn={(arg) => setParentLoggedIn(arg)}
-                setParentUser={(arg) => setParentUser(arg)}
+                      setParentIsProcessing={(arg) => setParentIsProcessing(arg)}
+                      setParentLoggedIn={(arg) => setParentLoggedIn(arg)}
+                      setParentUser={(arg) => setParentUser(arg)}
                     />
                   }
                 ></Route>
-                <Route path="/request" exact component={About}></Route>
-                <Route path="/about" exact component={About}></Route>
+                <Route
+                  path='/request'
+                  exact
+                  render={
+                    () => <SendRequest
+                      setParentIsProcessing={(arg) => setParentIsProcessing(arg)}
+                    />
+                  }
+                ></Route>
+                <Route path='/about' exact component={About}></Route>
                 <Route path='/' exact component={Home}></Route>
               </Switch>
             </div>

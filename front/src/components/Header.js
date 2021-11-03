@@ -41,6 +41,7 @@ const Header = (props) => {
         <ul>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/about">About</Link></li>
+          <li><Link to="/request">Request</Link></li>
         </ul>
         <Button
           color='primary'

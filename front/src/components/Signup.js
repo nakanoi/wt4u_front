@@ -41,7 +41,7 @@ const SignUp = (props) => {
         name: name,
         email: email,
         password: password,
-        password: password,
+        password_confirmation: password,
       }
       const res = await axios.post(
         'http://localhost:8080/api/v1/auth/',
@@ -83,13 +83,17 @@ const SignUp = (props) => {
           fullWidth
           label='パスワード'
           value={password}
+          key='password'
+          type='password'
           onChange={event => setPassword(event.target.value)}
         />
         <TextField
           required
           fullWidth
           label='パスワード確認'
+          type='password'
           value={confirmation}
+          key='password-confirmation'
           onChange={event => setConfirmation(event.target.value)}
         />
         <Button
