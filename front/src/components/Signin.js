@@ -10,7 +10,31 @@ const SignIn = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const handleCurrentUser = async () => {
+    try {
+      const res = await axios.get(
+        'http://localhost:8080/api/v1/auth/sessions',
+        {
+          headers: {
+            'access-token': Cookies.get('access-token'),
+            'client': Cookies.get('client'),
+            'uid': Cookies.get('uid'),
+          }
+        }
+      );
+      if (res.data.is_login) {
+        props.setParentUser(res.data.user);
+        props.setParentType(res.data.type);
+        props.setParentAgent(res.data.agent);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+    props.setParentIsProcessing(false);
+  }
+
   const handleSignIn = async () => {
+    props.setParentIsProcessing(true);
     try {
       const data = {
         email: email,
@@ -24,15 +48,14 @@ const SignIn = (props) => {
         Cookies.set('access-token', res.headers['access-token']);
         Cookies.set('client', res.headers['client']);
         Cookies.set('uid', res.headers['uid']);
+        props.setParentLoggedIn(true);
+        handleCurrentUser();
       }
-      console.log(res.data);
-      console.log(res.headers);
     } catch (error) {
       console.error(error);
+      props.setParentIsProcessing(false);
     }
   }
-  
-
 
   return (
     <React.Fragment>
