@@ -72,6 +72,7 @@ const SignIn = (props) => {
           required
           fullWidth
           label='パスワード'
+          type='password'
           value={password}
           onChange={event => setPassword(event.target.value)}
         />
