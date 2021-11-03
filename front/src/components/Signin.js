@@ -1,6 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import {
   Button,
   TextField,
@@ -57,32 +58,36 @@ const SignIn = (props) => {
     }
   }
 
-  return (
-    <React.Fragment>
-      <h1>SignIn</h1>
-      <form>
-        <TextField
-          required
-          fullWidth
-          label='メールアドレス'
-          value={email}
-          onChange={event => setEmail(event.target.value)}
-        />
-        <TextField
-          required
-          fullWidth
-          label='パスワード'
-          type='password'
-          value={password}
-          onChange={event => setPassword(event.target.value)}
-        />
-        <Button
-          color='primary'
-          onClick={handleSignIn}
-        >送信</Button>
-      </form>
-    </React.Fragment>
-  )
+  if (props.isLoggedIn) {
+    return <Redirect to='/'/>
+  } else {
+    return (
+      <React.Fragment>
+        <h1>SignIn</h1>
+        <form>
+          <TextField
+            required
+            fullWidth
+            label='メールアドレス'
+            value={email}
+            onChange={event => setEmail(event.target.value)}
+          />
+          <TextField
+            required
+            fullWidth
+            label='パスワード'
+            type='password'
+            value={password}
+            onChange={event => setPassword(event.target.value)}
+          />
+          <Button
+            color='primary'
+            onClick={handleSignIn}
+          >送信</Button>
+        </form>
+      </React.Fragment>
+    ) 
+  }
 }
 
 export default SignIn;

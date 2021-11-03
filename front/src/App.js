@@ -112,6 +112,7 @@ const App = () => {
                   exact
                   render={
                     () => <SignIn
+                      isLoggedIn={loggedIn}
                       setParentIsProcessing={(arg) => setParentIsProcessing(arg)}
                       setParentLoggedIn={(arg) => setParentLoggedIn(arg)}
                       setParentUser={(arg) => setParentUser(arg)}
@@ -125,12 +126,14 @@ const App = () => {
                   exact
                   render={
                     () => <SignUp
+                      isLoggedIn={loggedIn}
                       setParentIsProcessing={(arg) => setParentIsProcessing(arg)}
                       setParentLoggedIn={(arg) => setParentLoggedIn(arg)}
                       setParentUser={(arg) => setParentUser(arg)}
                     />
                   }
                 ></Route>
+                {loggedIn &&
                 <Route
                   path='/request'
                   exact
@@ -140,6 +143,7 @@ const App = () => {
                     />
                   }
                 ></Route>
+                }
                 <Route path='/about' exact component={About}></Route>
                 <Route path='/' exact component={Home}></Route>
               </Switch>

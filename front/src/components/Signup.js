@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import {
   Button,
   TextField,
@@ -60,49 +61,53 @@ const SignUp = (props) => {
     }
   }
 
-  return (
-    <React.Fragment>
-      <h1>SignUp</h1>
-      <form>
-        <TextField
-          required
-          fullWidth
-          label='名前'
-          value={name}
-          onChange={event => setName(event.target.value)}
-        />
-        <TextField
-          required
-          fullWidth
-          label='メールアドレス'
-          value={email}
-          onChange={event => setEmail(event.target.value)}
-        />
-        <TextField
-          required
-          fullWidth
-          label='パスワード'
-          value={password}
-          key='password'
-          type='password'
-          onChange={event => setPassword(event.target.value)}
-        />
-        <TextField
-          required
-          fullWidth
-          label='パスワード確認'
-          type='password'
-          value={confirmation}
-          key='password-confirmation'
-          onChange={event => setConfirmation(event.target.value)}
-        />
-        <Button
-          color='primary'
-          onClick={handleSignUp}
-        >送信</Button>
-      </form>
-    </React.Fragment>
-  )
+  if (props.isLoggedIn) {
+    return <Redirect to='/'/>
+  } else {
+    return (
+      <React.Fragment>
+        <h1>SignUp</h1>
+        <form>
+          <TextField
+            required
+            fullWidth
+            label='名前'
+            value={name}
+            onChange={event => setName(event.target.value)}
+          />
+          <TextField
+            required
+            fullWidth
+            label='メールアドレス'
+            value={email}
+            onChange={event => setEmail(event.target.value)}
+          />
+          <TextField
+            required
+            fullWidth
+            label='パスワード'
+            value={password}
+            key='password'
+            type='password'
+            onChange={event => setPassword(event.target.value)}
+          />
+          <TextField
+            required
+            fullWidth
+            label='パスワード確認'
+            type='password'
+            value={confirmation}
+            key='password-confirmation'
+            onChange={event => setConfirmation(event.target.value)}
+          />
+          <Button
+            color='primary'
+            onClick={handleSignUp}
+          >送信</Button>
+        </form>
+      </React.Fragment>
+    )
+  }
 }
 
 export default SignUp;
