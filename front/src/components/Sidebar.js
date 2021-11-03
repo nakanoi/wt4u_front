@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 
-//class Sidebar extends React.Component {
 function Sidebar(props) {
   const [user, setUser] = React.useState(null);
   const [type, setType] = React.useState(null);
@@ -20,8 +19,12 @@ function Sidebar(props) {
     return (
       <React.Fragment>
         <h2>Sidbar</h2>
-        <h3>名前: {user.name}</h3>
-        <h3>Email: {user.email}</h3>
+        {user &&
+          <div>
+            <h3>名前: {user.name}</h3>
+            <h3>Email: {user.email}</h3>
+          </div>
+        }
         {type ?
           (agent ?
             // Agent

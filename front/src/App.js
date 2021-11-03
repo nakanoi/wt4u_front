@@ -18,7 +18,7 @@ import SignUp from './components/Signup';
 
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isProcessing, setIsProcessing] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [type, setType] = useState(null);
@@ -36,25 +36,44 @@ const App = () => {
           }
         }
       );
-      const data = res.data;
-      if (data.is_login) {
+      if (res.data.is_login) {
         setLoggedIn(true);
-        setUser(data.user);
-        setType(data.type);
-        setAgent(data.agent);
+        setUser(res.data.user);
+        setType(res.data.type);
+        setAgent(res.data.agent);
       }
     } catch (err) {
       console.error(err);
     }
-
-    setIsLoading(false);
+    setParentIsProcessing(false);
   }
 
   useEffect(() => {
     handleCurrentUser();
   }, [setUser]);
 
-  if (isLoading) {
+  // 子でprocessing
+  const setParentIsProcessing = (arg) => {
+    setIsProcessing(arg);
+  }
+  // 子でlogged in
+  const setParentLoggedIn = (arg) => {
+    setLoggedIn(arg);
+  }
+  // 子でuser
+  const setParentUser = (arg) => {
+    setUser(arg);
+  }
+  // 子でtype
+  const setParentType = (arg) => {
+    setType(arg);
+  }
+  // 子でagent
+  const setParentAgent = (arg) => {
+    setAgent(arg);
+  }
+
+  if (isProcessing) {
     return (
       <React.Fragment>
       </React.Fragment>
@@ -62,16 +81,46 @@ const App = () => {
   } else {
     return (
       <React.Fragment>
+        <h1>Processing {String(isProcessing)}, Logged in {String(loggedIn)}</h1>
         <Router>
-          <Header />
+          <Header
+            isLoggedIn={loggedIn}
+            setParentIsProcessing={(arg) => setParentIsProcessing(arg)}
+            setParentLoggedIn={(arg) => setParentLoggedIn(arg)}
+            setParentUser={(arg) => setParentUser(arg)}
+            setParentType={(arg) => setParentType(arg)}
+            setParentAgent={(arg) => setParentAgent(arg)}
+          />
           <div className="content">
             <div className="sidebar">
-              <Sidebar isLoggedIn={loggedIn} user={user} type={type} agent={agent} />
+              <Sidebar isLoggedIn={loggedIn} user={user} type={type} agent={agent}/>
             </div>
             <div className="main">
               <Switch>
-                <Route path='/signin' exact component={SignIn}></Route>
-                <Route path='/signup' exact component={SignUp}></Route>
+                <Route
+                  path='/signin'
+                  exact
+                  render={
+                    () => <SignIn
+                setParentIsProcessing={(arg) => setParentIsProcessing(arg)}
+                setParentLoggedIn={(arg) => setParentLoggedIn(arg)}
+                setParentUser={(arg) => setParentUser(arg)}
+                setParentType={(arg) => setParentType(arg)}
+                setParentAgent={(arg) => setParentAgent(arg)}
+                    />
+                  }
+                ></Route>
+                <Route
+                  path='/signup'
+                  exact
+                  render={
+                    () => <SignUp
+                setParentIsProcessing={(arg) => setParentIsProcessing(arg)}
+                setParentLoggedIn={(arg) => setParentLoggedIn(arg)}
+                setParentUser={(arg) => setParentUser(arg)}
+                    />
+                  }
+                ></Route>
                 <Route path="/request" exact component={About}></Route>
                 <Route path="/about" exact component={About}></Route>
                 <Route path='/' exact component={Home}></Route>
