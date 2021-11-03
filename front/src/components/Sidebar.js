@@ -1,53 +1,57 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import TypeForm from "./TypeForm";
 
 
 function Sidebar(props) {
-  const [user, setUser] = React.useState(null);
-  const [type, setType] = React.useState(null);
-  const [agent, setAgent] = React.useState(null);
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  // 子でprocessing
+  const setGrandParentIsProcessing = (arg) => {
+    props.setParentIsProcessing(arg);
+  }
+  // 子でtype
+  const setGrandParentType = (arg) => {
+    props.setParentType(arg);
+  }
+  // 子でagent
+  const setGrandParentAgent = (arg) => {
+    props.setParentAgent(arg);
+  }
 
-  useEffect(() => {
-    setUser(props.user);
-    setType(props.type);
-    setAgent(props.agent);
-    setIsLoggedIn(props.isLoggedIn);
-  }, []);
-
-  if (isLoggedIn) {
+  if (props.isLoggedIn) {
     return (
       <React.Fragment>
         <h2>Sidbar</h2>
-        {user &&
+        {props.user &&
           <div>
-            <h3>名前: {user.name}</h3>
-            <h3>Email: {user.email}</h3>
+            <h3>名前: {props.user.name}</h3>
+            <h3>Email: {props.user.email}</h3>
           </div>
         }
-        {type ?
-          (agent ?
+        {props.type ?
+          (props.agent ?
             // Agent
             (
               <div>
-                <p>種別: {type.user_type}</p>
-                <p>地域: {agent.area}</p>
-                <p>業種: {agent.business}</p>
+                <p>種別: {props.type.user_type}</p>
+                <p>地域: {props.agent.area}</p>
+                <p>業種: {props.agent.business}</p>
               </div>
             ) :
             // Tourist
             (
               <div>
-                <p>種別: {type.user_type}</p>
+                <p>種別: {props.type.user_type}</p>
               </div>
             )
           )
           :
           (
             // Regist Type
-            <div>
-              <p>Todo: 種別登録フォーム</p>
-            </div>
+            <TypeForm
+              setGrandParentIsProcessing={(arg) => setGrandParentIsProcessing(arg)}
+              setGrandParentType={(arg) => setGrandParentType(arg)}
+              setGrandParentAgent={(arg) => setGrandParentAgent(arg)}
+            />
           )
         }
       </React.Fragment>
@@ -56,7 +60,6 @@ function Sidebar(props) {
     return (
       <React.Fragment>
         <h1>Sidbar</h1>
-        <div>Todo: ログインフォーム</div>
         <Link to='/signin'>サインイン</Link>
         <Link to='/signup'>サインアップ</Link>
       </React.Fragment>
