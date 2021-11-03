@@ -93,7 +93,16 @@ const App = () => {
           />
           <div className="content">
             <div className="sidebar">
-              <Sidebar isLoggedIn={loggedIn} user={user} type={type} agent={agent}/>
+              <Sidebar
+                isLoggedIn={loggedIn}
+                user={user}
+                type={type}
+                agent={agent}
+                setParentIsProcessing={(arg) => setParentIsProcessing(arg)}
+                setParentUser={(arg) => setParentUser(arg)}
+                setParentType={(arg) => setParentType(arg)}
+                setParentAgent={(arg) => setParentAgent(arg)}
+              />
             </div>
             <div className="main">
               <Switch>
