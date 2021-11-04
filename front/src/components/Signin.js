@@ -24,7 +24,7 @@ const SignIn = (props) => {
         }
       );
       if (res.data.is_login) {
-        props.setParentUser(res.data.user);
+        props.setParentUser(res.data);
         props.setParentType(res.data.type);
         props.setParentAgent(res.data.agent);
       }

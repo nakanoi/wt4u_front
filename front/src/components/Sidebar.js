@@ -23,8 +23,8 @@ function Sidebar(props) {
         <h2>Sidbar</h2>
         {props.user &&
           <div>
-            <h3>名前: {props.user.name}</h3>
-            <h3>Email: {props.user.email}</h3>
+            <h3>名前: {props.user.user.name}</h3>
+            <h3>Email: {props.user.user.email}</h3>
           </div>
         }
         {props.type ?

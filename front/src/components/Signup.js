@@ -27,7 +27,7 @@ const SignUp = (props) => {
         }
       );
       if (res.data.is_login) {
-        props.setParentUser(res.data.user);
+        props.setParentUser(res.data);
       }
     } catch (err) {
       console.error(err);
