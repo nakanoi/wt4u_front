@@ -6,6 +6,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { API_ROOT } from "../lib/const";
 
 
 const SignUp = (props) => {
@@ -17,14 +18,8 @@ const SignUp = (props) => {
   const handleCurrentUser = async () => {
     try {
       const res = await axios.get(
-        'http://localhost:8080/api/v1/auth/sessions',
-        {
-          headers: {
-            'access-token': Cookies.get('access-token'),
-            'client': Cookies.get('client'),
-            'uid': Cookies.get('uid'),
-          }
-        }
+        `${API_ROOT}/auth/sessions`,
+        {headers: props.headers()}
       );
       if (res.data.is_login) {
         props.setParentUser(res.data);
@@ -45,7 +40,7 @@ const SignUp = (props) => {
         password_confirmation: password,
       }
       const res = await axios.post(
-        'http://localhost:8080/api/v1/auth/',
+        `${API_ROOT}/auth`,
         data,
       )
       if (res.status === 200) {

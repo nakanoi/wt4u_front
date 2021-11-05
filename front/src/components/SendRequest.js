@@ -8,12 +8,12 @@ import {
   MenuItem,
 } from "@mui/material";
 import axios from "axios";
-import Cookies from "js-cookie";
 import DatePicker from '@mui/lab/DatePicker'
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import DateAdapter from '@mui/lab/AdapterDateFns'
 
 import { GENRE_OPTIONS, AREA_OPTIONS } from "../lib/Options";
+import { API_ROOT } from "../lib/const";
 
 
 const SendRequest = (props) => {
@@ -50,15 +50,9 @@ const SendRequest = (props) => {
       }
       console.log(request);
       const res = await axios.post(
-        'http://localhost:8080/api/v1/requests',
+        `${API_ROOT}/requests`,
         request,
-        {
-          headers: {
-            'access-token': Cookies.get('access-token'),
-            'client': Cookies.get('client'),
-            'uid': Cookies.get('uid'),
-          }
-        }
+        {headers: props.headers()}
       )
       if (res.status === 200) {
       }
