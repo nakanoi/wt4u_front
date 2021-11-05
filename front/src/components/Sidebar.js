@@ -51,6 +51,7 @@ function Sidebar(props) {
               setGrandParentIsProcessing={(arg) => setGrandParentIsProcessing(arg)}
               setGrandParentType={(arg) => setGrandParentType(arg)}
               setGrandParentAgent={(arg) => setGrandParentAgent(arg)}
+              headers={props.headers}
             />
           )
         }

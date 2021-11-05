@@ -1,5 +1,4 @@
 import axios from "axios";
-import Cookies from "js-cookie";
 import React, { useState } from "react";
 import {
   Button,
@@ -7,6 +6,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import { AREA_OPTIONS, BUSINESS_OPTIONS } from '../lib/Options'
+import { API_ROOT } from "../lib/const";
 
 
 const TypeForm = (props) => {
@@ -17,12 +17,7 @@ const TypeForm = (props) => {
   const handleType = async (e) => {
     try {
       const type = e.target.dataset.type,
-            data = {'type': type},
-            headers = {
-              'access-token': Cookies.get('access-token'),
-              'client': Cookies.get('client'),
-              'uid': Cookies.get('uid'),
-            }
+            data = {'type': type};
       let agentData;
 
       if (type === 'agent') {
@@ -39,17 +34,17 @@ const TypeForm = (props) => {
       props.setGrandParentIsProcessing(true);
       // 種別
       const resType = await axios.post(
-        'http://localhost:8080/api/v1/types',
+        `${API_ROOT}/types`,
         data,
-        {headers: headers}
+        {headers: props.headers()}
       );
       props.setGrandParentType(resType.data);
       // 事業者種別
       if (type === 'agent') {
         const resAgent = await axios.post(
-          'http://localhost:8080/api/v1/agents',
+          `${API_ROOT}/agents`,
           agentData,
-          {headers: headers}
+          {headers: props.headers()}
         );
         props.setGrandParentAgent(resAgent.data);
       }

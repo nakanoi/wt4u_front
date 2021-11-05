@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
   ListItem,
@@ -41,10 +41,11 @@ const Room = (props) => {
       await axios.post(
         `${API_ROOT}/messages`,
         message,
-        {headers: props.headers}
+        {headers: props.headers()}
       );
     }
   }
+  console.log('data', props.roomData);
 
   return (
     <React.Fragment>

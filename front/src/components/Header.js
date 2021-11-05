@@ -5,13 +5,15 @@ import { Link } from "react-router-dom";
 import {
   Button
 } from "@mui/material";
+import { API_ROOT } from "../lib/const";
+
 
 const Header = (props) => {
   const handleSignOut = async () => {
     props.setParentIsProcessing(true);
     try {
       const res = await axios.delete(
-        'http://localhost:8080/api/v1/auth/sign_out',
+        `${API_ROOT}/auth/sign_out`,
         {
           headers: {
             'access-token': Cookies.get('access-token'),
@@ -42,6 +44,7 @@ const Header = (props) => {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/about">About</Link></li>
           <li><Link to="/request">Request</Link></li>
+          <li><Link to="/requests">All Requests</Link></li>
           <li><Link to="/rooms">Rooms</Link></li>
         </ul>
         <Button

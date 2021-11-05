@@ -6,6 +6,8 @@ import {
   Button,
   TextField,
 } from "@mui/material";
+import { API_ROOT } from "../lib/const";
+
 
 const SignIn = (props) => {
   const [email, setEmail] = useState('');
@@ -14,19 +16,14 @@ const SignIn = (props) => {
   const handleCurrentUser = async () => {
     try {
       const res = await axios.get(
-        'http://localhost:8080/api/v1/auth/sessions',
-        {
-          headers: {
-            'access-token': Cookies.get('access-token'),
-            'client': Cookies.get('client'),
-            'uid': Cookies.get('uid'),
-          }
-        }
+        `${API_ROOT}/auth/sessions`,
+        {headers: props.headers()}
       );
       if (res.data.is_login) {
         props.setParentUser(res.data);
         props.setParentType(res.data.type);
         props.setParentAgent(res.data.agent);
+        props.setRoomLogining();
       }
     } catch (err) {
       console.error(err);
@@ -42,7 +39,7 @@ const SignIn = (props) => {
         password: password,
       }
       const res = await axios.post(
-        'http://localhost:8080/api/v1/auth/sign_in',
+        `${API_ROOT}/auth/sign_in`,
         data,
       )
       if (res.status === 200) {
@@ -51,6 +48,7 @@ const SignIn = (props) => {
         Cookies.set('uid', res.headers['uid']);
         props.setParentLoggedIn(true);
         handleCurrentUser();
+        props.setRoomLogining();
       }
     } catch (error) {
       console.error(error);
