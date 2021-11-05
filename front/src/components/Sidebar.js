@@ -1,6 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import TypeForm from "./TypeForm";
+import {
+  Table,
+  TableBody,
+  TableRow,
+  TableCell,
+  List,
+  ListItem,
+  Button,
+} from '@mui/material'
 
 
 function Sidebar(props) {
@@ -20,28 +29,40 @@ function Sidebar(props) {
   if (props.isLoggedIn) {
     return (
       <React.Fragment>
-        <h2>Sidbar</h2>
         {props.user &&
-          <div>
-            <h3>名前: {props.user.user.name}</h3>
-            <h3>Email: {props.user.user.email}</h3>
-          </div>
+          <h2>{props.user.user.name}</h2>
         }
         {props.type ?
           (props.agent ?
             // Agent
             (
-              <div>
-                <p>種別: {props.type.user_type}</p>
-                <p>地域: {props.agent.area}</p>
-                <p>業種: {props.agent.business}</p>
-              </div>
+              <Table>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>CATEGORY</TableCell>
+                    <TableCell>{props.type.user_type}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>AREA</TableCell>
+                    <TableCell>{props.agent.area}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>BUSINESS</TableCell>
+                    <TableCell>{props.agent.business}</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
             ) :
             // Tourist
             (
-              <div>
-                <p>種別: {props.type.user_type}</p>
-              </div>
+              <Table>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>CATEGORY</TableCell>
+                    <TableCell>{props.type.user_type}</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
             )
           )
           :
@@ -60,9 +81,18 @@ function Sidebar(props) {
   } else {
     return (
       <React.Fragment>
-        <h1>Sidbar</h1>
-        <Link to='/signin'>サインイン</Link>
-        <Link to='/signup'>サインアップ</Link>
+        <List>
+          <ListItem key='signin'>
+            <Link to='/signin'>
+              <Button>SIGN IN</Button>
+            </Link>
+          </ListItem>
+          <ListItem key='signup'>
+            <Link to='/signup'>
+              <Button>SIGN UP</Button>
+            </Link>
+          </ListItem>
+        </List>
       </React.Fragment>
     )
   }

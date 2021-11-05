@@ -3,7 +3,9 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 import {
-  Button
+  Button,
+  List,
+  ListItem,
 } from "@mui/material";
 import { API_ROOT } from "../lib/const";
 
@@ -40,17 +42,57 @@ const Header = (props) => {
   return (
     <React.Fragment>
       <header>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/request">Request</Link></li>
-          <li><Link to="/requests">All Requests</Link></li>
-          <li><Link to="/rooms">Rooms</Link></li>
-        </ul>
-        <Button
-          color='primary'
-          onClick={handleSignOut}
-        >サインアウト</Button>
+        <List>
+          <ListItem key="home">
+            <Link to='/'>
+              <Button
+                color='primary'
+              >HOME</Button>
+            </Link>
+          </ListItem>
+          <ListItem key="about">
+            <Link to='/about'>
+              <Button
+                color='primary'
+              >ABOUT</Button>
+            </Link>
+          </ListItem>
+          {props.isLoggedIn && props.type.user_type === 'tourist' && (
+            <ListItem key="request">
+              <Link to='/request'>
+                <Button
+                  color='primary'
+                >REQUEST</Button>
+              </Link>
+            </ListItem>
+          )}
+          {props.isLoggedIn && props.type.user_type === 'agent' && (
+            <ListItem key="all-requests">
+              <Link to='/requests'>
+                <Button
+                  color='primary'
+                >ALL REQUESTS</Button>
+              </Link>
+            </ListItem>
+          )}
+          {props.isLoggedIn && (
+            <ListItem key="rooms">
+              <Link to='/rooms'>
+                <Button
+                  color='primary'
+                >ROOMS</Button>
+              </Link>
+            </ListItem>
+          )}
+          {props.isLoggedIn && (
+            <ListItem key='signout'>
+              <Button
+                color='primary'
+                onClick={handleSignOut}
+              >SIGN OUT</Button>
+            </ListItem>
+            )}
+        </List>
       </header>
     </React.Fragment>
   )

@@ -167,6 +167,7 @@ const App = (props) => {
         <Router>
           <Header
             isLoggedIn={loggedIn}
+            type={type}
             setParentIsProcessing={(arg) => setParentIsProcessing(arg)}
             setParentLoggedIn={(arg) => setParentLoggedIn(arg)}
             setParentUser={(arg) => setParentUser(arg)}

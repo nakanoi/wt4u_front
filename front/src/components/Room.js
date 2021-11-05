@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import {
   ListItem,
@@ -20,7 +20,32 @@ const Room = (props) => {
 
   const messagesList = (messages) => {
     return messages.map(message => {
-      return <ListItem key={message.id}>{message.context}</ListItem>
+      console.log(message)
+      if (message.user_id == props.user.user.id) {
+        return (
+          <ListItem key={message.id} className="message-right">
+            <div className="mes-wrap">
+              <p>{message.context}</p>
+              <div className="time">
+                {Array.from(message.created_at).slice(0, 10).join('')}&nbsp;
+                {Array.from(message.created_at).slice(11, 19).join('')}
+              </div>
+            </div>
+          </ListItem>
+        );
+      } else {
+        return (
+          <ListItem key={message.id}>
+            <div className="mes-wrap-else">
+              <p>{message.context}</p>
+              <div className="time">
+                {Array.from(message.created_at).slice(0, 10).join('')}
+                {Array.from(message.created_at).slice(11, 19).join('')}
+              </div>
+            </div>
+          </ListItem>
+        );
+      }
     });
   }
 
@@ -45,33 +70,33 @@ const Room = (props) => {
       );
     }
   }
-  console.log('data', props.roomData);
 
   return (
     <React.Fragment>
-      <h1>Rooms</h1>
-      <h2>Members</h2>
-      <List>
-        {usersList(props.roomData.users)}
-      </List>
-      <h2>Contennt</h2>
-      <List>
-        {messagesList(props.roomData.messages)}
-      </List>
-      <h2>MessageForm</h2>
+      <h1>ROOM</h1>
+      <div className="member-wrap">
+        <h2>MEMBERS</h2>
+        <List>
+          {usersList(props.roomData.users)}
+        </List>
+      </div>
       <form>
         <TextField
           required
           fullWidth
-          label='投稿タイトル'
+          label='context'
           value={newMessage}
           onChange={handleMessageInput}
         />
         <Button
           type='submit'
           onClick={submitMessage}
-        >送信</Button>
+          className="submit"
+        >SUBMIT</Button>
       </form>
+      <List>
+        {messagesList(props.roomData.messages.slice().reverse())}
+      </List>
       <RoomWebSocket
         cableApp={props.cableApp}
         updateApp={props.updateApp}
