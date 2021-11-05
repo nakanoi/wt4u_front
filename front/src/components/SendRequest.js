@@ -64,15 +64,15 @@ const SendRequest = (props) => {
 
   return (
     <React.Fragment>
-      <h1>Request</h1>
+      <h1>REQUEST</h1>
       <form>
         <List>
           <ListItem className='column-list'>
-            <p>地域</p>
+            <p>AREA</p>
             <Select
               required
               fullWidth
-              label='地域'
+              label='AREA'
               value={area}
               onChange={event => setArea(event.target.value)}
             >
@@ -82,33 +82,33 @@ const SendRequest = (props) => {
             </Select>
           </ListItem>
           <ListItem className='column-list'>
-            <p>投稿タイトル</p>
+            <p>TRAVEL TITLE</p>
             <TextField
               required
               fullWidth
-              label='投稿タイトル'
+              label='title'
               value={title}
               onChange={event => setTitle(event.target.value)}
             />
           </ListItem>
           <ListItem className='column-list'>
-            <p>予算</p>
+            <p>COST</p>
             <TextField
               required
               fullWidth
-              label='予算'
+              label='cost'
               type='number'
               value={cost}
               onChange={event => setCost(event.target.value)}
             />
           </ListItem>
           <ListItem className='column-list'>
-            <p>旅行者数</p>
+            <p>FELLOW NUMBER</p>
             <TextField
               required
               fullWidth
               fullWidth
-              label='旅行者数'
+              label='number'
               type='number'
               value={number}
               onChange={event => setNumber(event.target.value)}
@@ -116,11 +116,11 @@ const SendRequest = (props) => {
             />
           </ListItem>
           <ListItem className='column-list'>
-            <p>明後日</p>
+            <p>DEPARTURE DATE</p>
             <LocalizationProvider dateAdapter={DateAdapter}>
               <DatePicker
                 required
-                label='出発日'
+                label='date'
                 value={date}
                 onChange={(val) => setDate(val)}
                 renderInput={(params) => <TextField {...params} />}
@@ -128,21 +128,21 @@ const SendRequest = (props) => {
             </LocalizationProvider>
           </ListItem>
           <ListItem className='column-list'>
-            <p>日数</p>
+            <p>TRAVEL DAYS</p>
             <TextField
               required
               fullWidth
-              label='日数'
+              label='days'
               value={days}
               onChange={event => setDays(event.target.value)}
             />
           </ListItem>
           <ListItem className='column-list'>
-            <p>ジャンル</p>
+            <p>TRAVEL GENRE</p>
             <Select
               required
               fullWidth
-              label='ジャンル'
+              label='genre'
               value={genre}
               onChange={event => setGenre(event.target.value)}
             >
@@ -152,24 +152,24 @@ const SendRequest = (props) => {
             </Select>
           </ListItem>
           <ListItem className='column-list'>
-            <p>範囲</p>
+            <p>RANGE</p>
             <TextField
               required
               fullWidth
-              label='範囲'
+              label='range'
               type='number'
               value={range}
               onChange={event => setRange(event.target.value)}
             />
           </ListItem>
           <ListItem className='column-list'>
-            <p>詳細</p>
+            <p>DETAILS</p>
             <TextField
               required
               fullWidth
               multiline
               rows={4}
-              label='詳細'
+              label='details'
               value={context}
               onChange={event => setContext(event.target.value)}
             />
@@ -179,7 +179,7 @@ const SendRequest = (props) => {
               color='primary'
               onClick={postRequest}
               fullWidth
-            >送信</Button>
+            >REQUEST</Button>
           </ListItem>
         </List>
       </form>
