@@ -21,7 +21,7 @@ const Room = (props) => {
   const messagesList = (messages) => {
     return messages.map(message => {
       console.log(message)
-      if (message.user_id == props.user.user.id) {
+      if (message.user_id === props.user.user.id) {
         return (
           <ListItem key={message.id} className="message-right">
             <div className="mes-wrap">
