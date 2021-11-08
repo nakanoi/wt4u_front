@@ -48,7 +48,6 @@ const SendRequest = (props) => {
         range: Number(range),
         context: context,
       }
-      console.log(request);
       const res = await axios.post(
         `${API_ROOT}/requests`,
         request,

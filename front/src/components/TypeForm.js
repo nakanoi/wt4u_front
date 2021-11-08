@@ -56,17 +56,18 @@ const TypeForm = (props) => {
 
   return (
     <React.Fragment>
-      <h1>種別登録</h1>
+      <h1>Your Type</h1>
       <form>
         <Button
           color='primary'
           data-type='tourist'
           onClick={e => handleType(e)}
-        >旅行者登録</Button>
-        <p>OR</p>
+        >I'm a Tourist</Button>
+        <p>or</p>
+        <p>Area</p>
         <Select
           fullWidth
-          label='地域'
+          label='Area'
           defaultValue=''
           value={area}
           onChange={event => setArea(event.target.value)}
@@ -75,9 +76,10 @@ const TypeForm = (props) => {
             (item) => <MenuItem key={item.value} value={item.value}>{item.label}</MenuItem>
           )}
         </Select>
+        <p>Agent</p>
         <Select
           fullWidth
-          label='事業種別'
+          label='agent'
           defaultValue=''
           value={business}
           onChange={event => setBusiness(event.target.value)}
@@ -90,7 +92,7 @@ const TypeForm = (props) => {
           color='primary'
           data-type='agent'
           onClick={e => handleType(e)}
-        >事業者登録</Button>
+        >I'm a Agent</Button>
       </form>
     </React.Fragment>
   )

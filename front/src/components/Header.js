@@ -57,7 +57,7 @@ const Header = (props) => {
               >ABOUT</Button>
             </Link>
           </ListItem>
-          {props.isLoggedIn && props.type.user_type === 'tourist' && (
+          {props.isLoggedIn && props.type && props.type.user_type === 'tourist' && (
             <ListItem key="request">
               <Link to='/request'>
                 <Button
@@ -66,7 +66,7 @@ const Header = (props) => {
               </Link>
             </ListItem>
           )}
-          {props.isLoggedIn && props.type.user_type === 'agent' && (
+          {props.isLoggedIn && props.type && props.type.user_type === 'agent' && (
             <ListItem key="all-requests">
               <Link to='/requests'>
                 <Button

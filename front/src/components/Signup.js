@@ -63,33 +63,37 @@ const SignUp = (props) => {
       <React.Fragment>
         <h1>SignUp</h1>
         <form>
+          <p>Name</p>
           <TextField
             required
             fullWidth
-            label='名前'
+            label='Name'
             value={name}
             onChange={event => setName(event.target.value)}
           />
+          <p>Email</p>
           <TextField
             required
             fullWidth
-            label='メールアドレス'
+            label='Email'
             value={email}
             onChange={event => setEmail(event.target.value)}
           />
+          <p>Password</p>
           <TextField
             required
             fullWidth
-            label='パスワード'
+            label='Password'
             value={password}
             key='password'
             type='password'
             onChange={event => setPassword(event.target.value)}
           />
+          <p>Confirmation</p>
           <TextField
             required
             fullWidth
-            label='パスワード確認'
+            label='Password Comfirmation'
             type='password'
             value={confirmation}
             key='password-confirmation'
@@ -98,7 +102,7 @@ const SignUp = (props) => {
           <Button
             color='primary'
             onClick={handleSignUp}
-          >送信</Button>
+          >Sign Up</Button>
         </form>
       </React.Fragment>
     )
