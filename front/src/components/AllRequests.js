@@ -42,12 +42,10 @@ const AllRequest = (props) => {
     const token = event.target.dataset.token,
           title = event.target.dataset.title,
           poster = event.target.dataset.poster,
-          name = event.target.dataset.name,
           data = {
             token: token,
             title: title,
             poster: Number(poster),
-            name: name,
           };
 
     await axios.post(
@@ -87,10 +85,6 @@ const AllRequest = (props) => {
               <TableCell>{request.days}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>Poster</TableCell>
-              <TableCell>{request.name}</TableCell>
-            </TableRow>
-            <TableRow>
               <TableCell>Cost</TableCell>
               <TableCell>{request.cost}</TableCell>
             </TableRow>
@@ -122,7 +116,6 @@ const AllRequest = (props) => {
     let token = null;
     return allRequests.map(request => {
       token = getRandomString();
-      console.log(request);
       return (
         <ListItem key={request.id} className="request-list">
           {requestUI(request, token)}
